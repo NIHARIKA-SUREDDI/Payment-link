@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import {  faFile } from '@fortawesome/free-solid-svg-icons';
+
 import { FaCheck, FaCopy } from "react-icons/fa";
 import { products } from './constants/products';
 import _ from "lodash";
