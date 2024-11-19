@@ -1,0 +1,100 @@
+body {
+  width: 50%;
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  height: 100vh;          
+  margin: 0 auto;  
+  background-color: rgb(17,24,39);            
+}
+
+.App{
+  
+ width: 500px;
+  margin: 0,auto;
+  border: 1px solid rgb(22, 22, 22);
+  background-color: rgb(31,41,55);
+  border-radius: 10px;
+ padding-right: 2px;
+  height: fit-content;
+  padding-left: 10px;
+
+}
+h2{
+  padding: 5px;
+  color: whitesmoke;
+  text-align: center;
+  font-size: 24px;
+
+  
+}
+.container{
+
+  display: flex;
+  flex-direction: column;
+ 
+   
+   /* margin: 0 auto; */
+   /* padding: 5px 10px;  */
+   padding-left: 20px;
+   /* padding-right: 10px; */
+
+  
+}
+.container label{
+  color:rgb(221, 209, 209);
+  font-size: 17px;
+  margin-bottom: 6px;
+  /* display: block; */
+}
+.container input{
+ padding: 8px;
+ width: 92%;
+ border-radius: 6px;
+ text-decoration: none;
+ border: none;
+ font-size: 15px;
+ margin-top: 4px;
+ background-color: rgb(55,65,81);
+ color: white;
+
+margin-bottom: 15px;
+}
+
+.container select{
+  padding: 8px;
+  width: 95%;
+ border-radius: 8px;
+ text-decoration: none;
+ border: none;
+ font-size: 15px;
+ margin-top: 4px;
+ background-color: rgb(55,65,81);
+ color: white;
+/* padding: 10px 15px; */
+margin-bottom:15px;
+
+}
+
+
+
+
+
+  
+
+ button{
+  padding: 8px 25px;
+  background-color: rgb(99,102,241);
+  color: blanchedalmond;
+  border: none;
+   width:60%; 
+  font-size: 15px;
+  border-radius: 8px;
+  display: block;
+   margin: 15px auto;
+}
+button:hover{
+ 
+  background-color: blue;
+
+}
