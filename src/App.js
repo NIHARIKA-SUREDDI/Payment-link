@@ -6,30 +6,31 @@ import { products } from './constants/products';
 import _ from "lodash";
 import { useState, useEffect } from "react";
 
-interface ProductItem {
-  "Product Name": string;
-  prices?: { id: string; label: string }[];
+// interface ProductItem {
+//   "Product Name": string;
+//   prices?: { id: string; label: string }[];
 
-}
+// }
 
-interface GroupedProducts {
-  [key: string]: ProductItem[];
-}
+// interface GroupedProducts {
+//   [key: string]: ProductItem[];
+// }
 
 function App() {
 
   const[userID  ,setUserID]=useState("");
   const[product ,setProduct]=useState("");
   const[mode ,setMode]=useState("");
+  console.log("Mode:",mode);
   const [priceID, setPriceID] = useState("");
   const [isCopied, setIsCopied] = useState(false);
   const [copyText, setCopyText] = useState("");
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState();
 
   const [groupedProducts, setGroupedProducts] = useState({});
 
   useEffect(() => {
-    const result: GroupedProducts = _.groupBy(products, "Product Name");
+    const result = _.groupBy(products, "Product Name");
     setGroupedProducts(result);
   }, []);
 
@@ -45,12 +46,33 @@ function App() {
   };
   
 
-  
-
   const handlePriceChange = (e) => {
-    setPriceID(e.target.value); 
-  };
+    const selectedPriceID = e.target.value; // Directly use the selected value from the dropdown
+    setPriceID(selectedPriceID);
+  
+  
+    // Find the selected product's price based on the selected price ID
+    const selectedPrice = groupedProducts[selectedProduct["Product Name"]]?.find(
+      (product) => product["Price ID"] === selectedPriceID
+    );
+  
+    if (selectedPrice) {
+        
+        if (
+            selectedPrice.Interval=== "month" ||
+            selectedPrice.Interval === "year"
+            ) 
+          {
+            setMode("Subscription");
+          }
+          else {
+              setMode("payment");
+          }
 
+      }
+    
+  };
+  
    const handleCreatePaymentLink = (e) => {
     e.preventDefault();
 
@@ -68,16 +90,14 @@ function App() {
 
 
   return (
-    <div className="App">
-    {/* <h2>Create Payment Link</h2> */}
-    <div class="container">
+    // <div className="App">
+    
+    <div className="container">
     <form onSubmit={handleCreatePaymentLink}>
     <h2>Create Payment Link</h2>
+
       <label for="userid">User ID:</label>
-     
-      
-     
-       <input 
+        <input 
         type="text"
         value={userID}
         onChange={(e) =>setUserID(e.target.value)}
@@ -88,10 +108,7 @@ function App() {
       
       
       <label for="product">Product:</label>
-     
-      
-
-      <select
+     <select
       value={product}
       onChange={handleProductChange} 
       required
@@ -116,19 +133,19 @@ function App() {
               </label>
               <select
                 value={priceID}
-                onChange={handlePriceChange}
+                onChange={ handlePriceChange}
                 required
               
               >
                 <option value="" disabled>
                   Select price
                 </option>
-                {groupedProducts[selectedProduct["Product Name"]].map(
-                  (item:products) => (
+                {groupedProducts[selectedProduct["Product Name"]]?.map(
+                  (item) => (
                     <option
                       key={item["Price ID"]}
                       value={item["Price ID"]}
-                    >{`${item.Currency} ${item.Amount},${item["Interval Count"] && item.Interval? `${item["Interval Count"]}  ${item.Interval}`  :" lifetime" }`}
+                    >{`${item?.Currency} ${item?.Amount},${item["Interval Count"] && item.Interval? `${item["Interval Count"]}  ${item.Interval}`  :" lifetime" }`}
                     </option>
                   )
                 )
@@ -137,12 +154,6 @@ function App() {
             </div>
           )}
 
-
-      
-        
-     
-      
-     
       <label for="Mode">Mode:</label>
       <div>
 
@@ -155,26 +166,18 @@ function App() {
             <option value="subscription">Subscription</option>
           </select>
       </div>
-      
-     
 
-      
-    
-      
-      
-      
-      
       <button onClick={handleCopyToClipboard}> <react-icons icon={FaCheck}  /> 
-      {isCopied ? "Copied!" : "copy link"}
+      {isCopied ? "Copied!" : "Copy link"}
       {" "}
       {isCopied ? <FaCheck /> : <FaCopy />}
       </button>
-      {/* <i class="fa-solid fa-file"></i> */}
+
       
      
    </form>
    </div>
-    </div>
+    // </div>
   );
 }
 

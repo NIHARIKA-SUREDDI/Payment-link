@@ -1,5 +1,6 @@
 body {
-  width: 50%;
+ 
+
   display: flex;
   justify-content: center; 
   align-items: center;     
@@ -8,16 +9,16 @@ body {
   background-color: rgb(17,24,39);            
 }
 
-.App{
+form{
   
- width: 500px;
-  margin: 0,auto;
+  width: 80%;
+  margin: 0 auto;
   border: 1px solid rgb(22, 22, 22);
   background-color: rgb(31,41,55);
   border-radius: 10px;
- padding-right: 2px;
+ padding-right: 13px;
   height: fit-content;
-  padding-left: 10px;
+  padding-left: 30px;
 
 }
 h2{
@@ -32,11 +33,11 @@ h2{
 
   display: flex;
   flex-direction: column;
- 
-   
+ align-items: center;
+  justify-content: center; 
    /* margin: 0 auto; */
    /* padding: 5px 10px;  */
-   padding-left: 20px;
+   /* padding-left: 20px; */
    /* padding-right: 10px; */
 
   
@@ -97,4 +98,14 @@ button:hover{
  
   background-color: blue;
 
+}
+@media (max-width:560px)and(min-width:320px){
+  form{
+  
+    padding: 30px;
+    margin: 30px;
+  }
+  body{
+    padding: 10px 30px;
+  }
 }
